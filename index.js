@@ -4,8 +4,8 @@ const app = express();
 app.use(express.json());
 const clothes = [
     { id: 1, name: 'course1'},
-    { id: 1, name: 'course1'},
-    { id: 1, name: 'course1'}
+    { id: 2, name: 'course1'},
+    { id: 3, name: 'course1'}
 ];
 
 
@@ -15,11 +15,15 @@ app.get('/api/clothes/:id', (req, res) => {
   res.send(course);
 });
 
+app.get('/api/clothes', (req, res) => {
+    res.send(clothes);
+  });
+
 
 app.post('/api/clothes', (req, res) => {
     const { error } = validateCourse(req.body);
       
-    if( error ) return res.status(400).send(result.error.details[0].message);
+    if( error ) return res.status(400).send(error.details[0].message);
     
 
     const course = {
@@ -39,7 +43,7 @@ app.put('/api/clothes/:id', (req, res) => {
   
       const { error } = validateCourse(req.body);
       
-      if( error ) return res.status(400).send(result.error.details[0].message);
+      if( error ) return res.status(400).send(error.details[0].message);
 
       course.name = req.body.name;
       res.send(course);
@@ -49,10 +53,10 @@ app.put('/api/clothes/:id', (req, res) => {
 
 app.delete('/api/clothes/:id', (req, res) => {
     const course =  clothes.find(c => c.id == parseInt(req.params.id));
-    if( !course ) return res.status(400).send(result.error.details[0].message);
+    if( !course ) return res.status(400).send(error.details[0].message);
     
     const index = clothes.indexOf(course);
-    clothes.split(index, 1);
+    clothes.splice(index, 1);
 
     res.send(course);
 });
@@ -63,7 +67,7 @@ function validateCourse(course)
           name: Joi.string().min(3).required()
       };
 
-      return Joi.validate(req.body, schema);
+      return Joi.validate(course, schema);
   
 }
 

@@ -3,16 +3,16 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 const clothes = [
-    { id: 1, name: 'course1'},
-    { id: 2, name: 'course1'},
-    { id: 3, name: 'course1'}
+    { id: 1, name: 'clothe1'},
+    { id: 2, name: 'clothe1'},
+    { id: 3, name: 'clothe1'}
 ];
 
 
 app.get('/api/clothes/:id', (req, res) => {
-  const course =  clothes.find(c => c.id == parseInt(req.params.id));
-  if (!course) return res.status(404).send('the course with the givin id was not found');
-  res.send(course);
+  const clothe =  clothes.find(c => c.id == parseInt(req.params.id));
+  if (!clothe) return res.status(404).send('the clothe with the givin id was not found');
+  res.send(clothe);
 });
 
 app.get('/api/clothes', (req, res) => {
@@ -21,53 +21,53 @@ app.get('/api/clothes', (req, res) => {
 
 
 app.post('/api/clothes', (req, res) => {
-    const { error } = validateCourse(req.body);
+    const { error } = validateclothe(req.body);
       
     if( error ) return res.status(400).send(error.details[0].message);
     
 
-    const course = {
+    const clothe = {
         id: clothes.length + 1,
         name: req.body.name
     };
 
-    clothes.push(course);
-    res.send(course);
+    clothes.push(clothe);
+    res.send(clothe);
 });
 
 app.put('/api/clothes/:id', (req, res) => {
     
-    const course =  clothes.find(c => c.id == parseInt(req.params.id));
-    if (!course) res.status(404).send('the course with the givin id was not found');
+    const clothe =  clothes.find(c => c.id == parseInt(req.params.id));
+    if (!clothe) res.status(404).send('the clothe with the givin id was not found');
 
   
-      const { error } = validateCourse(req.body);
+      const { error } = validateclothe(req.body);
       
       if( error ) return res.status(400).send(error.details[0].message);
 
-      course.name = req.body.name;
-      res.send(course);
+      clothe.name = req.body.name;
+      res.send(clothe);
 
 });
 
 
 app.delete('/api/clothes/:id', (req, res) => {
-    const course =  clothes.find(c => c.id == parseInt(req.params.id));
-    if( !course ) return res.status(400).send(error.details[0].message);
+    const clothe =  clothes.find(c => c.id == parseInt(req.params.id));
+    if( !clothe ) return res.status(400).send(error.details[0].message);
     
-    const index = clothes.indexOf(course);
+    const index = clothes.indexOf(clothe);
     clothes.splice(index, 1);
 
-    res.send(course);
+    res.send(clothe);
 });
 
-function validateCourse(course)
+function validateclothe(clothe)
 {
     const schema = {
           name: Joi.string().min(3).required()
       };
 
-      return Joi.validate(course, schema);
+      return Joi.validate(clothe, schema);
   
 }
 

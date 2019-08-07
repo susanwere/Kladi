@@ -2,6 +2,8 @@ const Joi = require('joi');
 const express = require('express');
 const app = express();
 app.use(express.json());
+var pgp = require('pg-promise')(/* options */);
+var db = pgp('postgres://username:password@host:port/database');
 const clothes = [
     { id: 1, name: 'clothe1'},
     { id: 2, name: 'clothe1'},
@@ -49,7 +51,7 @@ app.put('/api/clothes/:id', (req, res) => {
       res.send(clothe);
 
 });
-
+// the most important asset in this church 
 
 app.delete('/api/clothes/:id', (req, res) => {
     const clothe =  clothes.find(c => c.id == parseInt(req.params.id));

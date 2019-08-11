@@ -1,8 +1,7 @@
-const Joi = require('joi');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
-const db = require('./mydb.js')
+const api = require('./api.js')
 
 app.use(express.json());
 
@@ -15,11 +14,11 @@ app.use(
 )
 
 
-app.get('/api/clothes/:id', db.getClotheById )
-app.get('/api/clothes', db.getClothes)
-app.post('/api/clothes', db.createClothes)
-app.put('/clothes/:id', db.updateClothes)
-app.delete('/clothes/:id', db.deleteclothe)
+app.get('/api/clothes/:id', api.getClotheById )
+app.get('/api/clothes', api.getClothes)
+app.post('/api/clothes', api.createClothes)
+app.put('/api/clothes/:id', api.updateClothes)
+app.delete('/api/clothes/:id', api.deleteclothe)
 
 
 
@@ -28,7 +27,3 @@ app.delete('/clothes/:id', db.deleteclothe)
 const port = process.env.PORT || 7000;
 
 app.listen(port, () => console.log(`Listening on port ${port}...`));
-
-
-
-

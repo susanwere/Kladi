@@ -1,0 +1,21 @@
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database "kladi-test";' -U postgres
+  - node mydb dropTables
+  - node mydb createTables
+test:
+  adapter: postgresql
+  database: kladi_test
+language: node_js
+node_js: 
+  - "stable"
+cache:
+  directories:
+    - "node_modules"
+before_install:
+- npm update
+install:
+- npm install
+script:
+- npm run coveralls

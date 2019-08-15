@@ -63,6 +63,7 @@ const deleteclothe = (request, response) => {
     })
 }
 
+
 module.exports = {
   getClothes,
   getClotheById,

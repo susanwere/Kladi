@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/susanwere/Kladi-Backend.svg?branch=master)](https://travis-ci.org/susanwere/Kladi-Backend) [![Coverage Status](https://coveralls.io/repos/github/susanwere/Kladi-Backend/badge.svg?branch=master)](https://coveralls.io/github/susanwere/Kladi-Backend?branch=master)
+
 # Kladi
 An e-commerce store for clothes
 
@@ -20,3 +22,9 @@ Run `node mydb dropTables` incase you want to drop the tables
 
 #Configuring Local Host
 Run `node index.js` to start the local server
+
+#Running tests
+Run `export NODE_ENV="test"` from the command line
+Run `npm test` to run the tests.
+
+To continue developing from the development environment, run `export NODE_ENV="development"`

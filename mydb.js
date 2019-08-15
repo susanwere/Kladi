@@ -3,10 +3,18 @@ const dotenv = require('dotenv');
 
 dotenv.config()
 
+let $database;
+
+if (process.env.NODE_ENV == 'development'){
+    $database = 'kladi'
+}else if(process.env.NODE_ENV == 'test'){
+    $database = 'kladi-test'
+}
+
 const pool = new Pool({
   user: process.env.POSTGRES_USER,
   host: 'localhost',
-  database: 'kladi',
+  database: $database,
   password: process.env.POSTGRES_PASSWORD,
   port: 5432,
 })
